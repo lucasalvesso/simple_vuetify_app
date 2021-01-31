@@ -1,28 +1,51 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-app-bar
+      app
+      dark
+      color="topAppBar"
+    >
+      <v-app-bar-nav-icon
+        @click.stop="drawer = !drawer"
+      />
+    </v-app-bar>
+
+    <v-navigation-drawer
+      v-model="drawer"
+      floating
+      :permanent="drawer"
+      app
+    >
+      <v-drawer />
+    </v-navigation-drawer>
+
+    <v-main class="mt-2">
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  import Drawer from '@/components/router/Drawer';
+
+  export default {
+    name: 'App',
+    components: {
+      'v-drawer': Drawer,
+    },
+
+    data: () => ({
+      //
+      drawer: false,
+
+    }),
+
+    created () {
+      // this.$vuetify.theme.dark = true;
+    },
+  };
 </script>
-
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import url("//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons");
 </style>
