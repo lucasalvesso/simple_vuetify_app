@@ -2,8 +2,8 @@
   <v-app>
     <v-app-bar
       app
-      dark
       color="topAppBar"
+      dark
     >
       <v-app-bar-nav-icon
         @click.stop="drawer = !drawer"
@@ -15,6 +15,8 @@
       floating
       :permanent="drawer"
       app
+      dark
+      color="sideMenuColor"
     >
       <v-drawer />
     </v-navigation-drawer>
@@ -26,8 +28,10 @@
 </template>
 
 <script>
-
   import Drawer from '@/components/router/Drawer';
+
+  // eslint-disable-next-line no-return-assign
+  const setPath = (object, path, value) => path.split('.').reduce((o, p, i) => o[p] = path.split('.').length === ++i ? value : o[p] || {}, object);
 
   export default {
     name: 'App',
@@ -36,13 +40,44 @@
     },
 
     data: () => ({
-      //
       drawer: false,
 
     }),
 
+    computed: {
+      customTheme () {
+        return [
+          { dark_theme: '$vuetify.theme.dark' },
+          { top_app_bar: '$vuetify.theme.themes.light.topAppBar' },
+          { side_menu_color: '$vuetify.theme.themes.light.sideMenuColor' },
+        ];
+      },
+    },
+
+    watch: {
+
+    },
+
     created () {
-      // this.$vuetify.theme.dark = true;
+      this.allStorage().forEach((opt) => {
+        const obj = this.customTheme.find(obj => Object.keys(obj)[0] === opt);
+        if (obj) {
+          let value = localStorage.getItem(Object.keys(obj).join(''));
+          if (value === 'true') value = true;
+          if (value === 'false') value = false;
+          const path = Object.values(obj).join('');
+
+          if (obj) {
+            setPath(this, path, value);
+          }
+        }
+      });
+    },
+
+    methods: {
+      allStorage () {
+        return Object.keys(localStorage);
+      },
     },
   };
 </script>

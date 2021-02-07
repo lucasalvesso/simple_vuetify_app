@@ -1,36 +1,43 @@
 <template>
-  <v-container>
+  <v-row class="pa-4">
     <template
       v-for="(obj, index) of allSettings"
     >
-      <v-hover
+      <v-col
         :key="index"
-        v-slot="{hover}"
+        cols="12"
+        sm="6"
       >
-        <v-card
-          :color="hover ? 'primary' : ''"
-          elevation="10"
-          :height="['xl', 'lg', 'md'].includes($vuetify.breakpoint.name) ? '120px' : '100px'"
-          style="cursor:pointer"
-          width="50%"
-          @click="configDialog = index"
+        <v-hover
+          v-slot:default="{hover}"
         >
-          <v-card-text class="justify-center align-center fill-height headline text-center">
-            <v-row class="justify-center align-center fill-height text-center">
-              {{ obj.name }}
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </v-hover>
+          <v-card
+            :color="hover ? 'primary' : ''"
+            elevation="10"
+            height="100px"
+            style="cursor:pointer"
+            width="100%"
+            @click="configDialog = obj.code"
+          >
+            <v-card-text class="justify-center align-center fill-height headline text-center">
+              <v-row class="justify-center align-center fill-height text-center mt-0">
+                {{ obj.name }}
+              </v-row>
+            </v-card-text>
+          </v-card>
+        </v-hover>
+      </v-col>
     </template>
     <v-dialog
       v-model="dialog"
       persistent
       width="600px"
     >
-      <themes />
+      <themes v-if="configDialog === 'themes'" />
+      <themes v-if="configDialog === 'themes2'" />
+      <themes v-if="configDialog === 'themes3'" />
     </v-dialog>
-  </v-container>
+  </v-row>
 </template>
 
 <script>
@@ -45,22 +52,30 @@
     }),
     computed: {
       allSettings () {
-        return [{ code: 'themes', name: 'Themes' }];
+        return [{ code: 'themes', name: 'Themes' }, { code: 'themes2', name: 'Themes 2' }, { code: 'themes3', name: 'Themes 3' }];
       },
     },
     watch: {
       configDialog (val) {
-        this.getConfigDialog(val);
+        if (val || val === 0) {
+          this.getConfigDialog(val);
+        }
       },
     },
 
     created () {
+      this.$root.$on('close', () => {
+        this.cancelDialog();
+      });
     },
     methods: {
+      cancelDialog () {
+        this.dialog = false;
+        this.configDialog = null;
+      },
       getConfigDialog (index) {
         this.dialog = true;
         this.dialogLoading = true;
-        // const set = this.allSettings[index];
       },
     },
   };

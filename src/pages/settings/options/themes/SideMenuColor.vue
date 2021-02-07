@@ -8,7 +8,7 @@
       class="d-flex justify-start pa-6"
     >
       <span class="">
-        Top App Bar Color
+        Side Menu Color
       </span>
     </v-col>
     <v-col
@@ -16,7 +16,7 @@
       class="d-flex justify-end"
     >
       <app-color-picker
-        v-model="topAppBar"
+        v-model="sideMenuColor"
         :disabled="$vuetify.theme.dark"
       />
     </v-col>
@@ -26,14 +26,15 @@
 <script>
   import AppColorPicker from '@/components/router/AppColorPicker';
   export default {
-    name: 'TopAppBar',
-    tag: 'top-app-bar',
+    name: 'SideMenu',
+    tag: 'side-menu',
     components: {
       AppColorPicker,
     },
 
     data: () => ({
-      topAppBar: null,
+      sideMenuColor: null,
+
     }),
 
     computed: {
@@ -41,14 +42,14 @@
     },
 
     watch: {
-      topAppBar (val) {
-        this.$vuetify.theme.themes.light.topAppBar = val;
+      sideMenuColor (val) {
+        this.$vuetify.theme.themes.light.sideMenuColor = val;
         this.$emit('input', val);
       },
     },
 
     created () {
-      this.topAppBar = this.$vuetify.theme.themes.light.topAppBar;
+      this.sideMenuColor = this.$vuetify.theme.themes.light.sideMenuColor;
     },
     methods: {
 

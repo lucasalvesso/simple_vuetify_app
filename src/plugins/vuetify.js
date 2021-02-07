@@ -8,8 +8,9 @@ export default new Vuetify({
     theme: {
         themes: {
             light: {
-                primary: colors.teal.darken4, // #E53935 teal darken-4
-                topAppBar: colors.teal.darken4,
+                primary: colors.blue.darken1, // #E53935 teal darken-4
+                sideMenuColor: colors.blue.darken1,
+                topAppBar: colors.blue.darken1,
             },
         },
     },

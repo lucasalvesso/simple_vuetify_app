@@ -3,12 +3,17 @@
     height="100%"
     width="256"
     class="mx-auto"
-    color="grey lighten-3"
+    color="sideMenuColor"
+    dark
   >
-    <v-list>
+    <v-list
+      dense
+      dark
+      color="sideMenuColor"
+    >
       <template>
         <v-list dense>
-          <v-list-item>
+          <v-list-item class="justify-center align-center">
             MENU
           </v-list-item>
         </v-list>

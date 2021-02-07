@@ -7,9 +7,7 @@
       sm="4"
       class="d-flex justify-start pa-6"
     >
-      <span class="black--text">
-        Turn on Dark Mode
-      </span>
+      Turn on Dark Mode
     </v-col>
     <v-col
       sm="4"
@@ -31,9 +29,14 @@
     data: () => ({
       darkMode: false,
     }),
+
+    created () {
+      this.darkMode = this.$vuetify.theme.dark;
+    },
     methods: {
       switchOption (val) {
         this.$vuetify.theme.dark = val;
+        this.$emit('input', val);
       },
     },
   };
