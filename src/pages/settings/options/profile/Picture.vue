@@ -7,16 +7,17 @@
       sm="4"
       class="d-flex justify-start pa-6"
     >
-      Turn on Dark Mode
+      Profile Picture
     </v-col>
     <v-col
       sm="4"
       class="d-flex justify-end"
     >
-      <v-switch
-        v-model="darkMode"
-        color="primary"
-        @click="switchOption(darkMode)"
+      <v-file-input
+        v-model="file"
+        label="File input"
+        filled
+        prepend-icon="mdi-camera"
       />
     </v-col>
   </v-row>
@@ -24,20 +25,16 @@
 
 <script>
   export default {
-    name: 'DarkTheme',
-    tag: 'dark-theme',
+    name: 'Picture',
+    tag: 'profile-picture',
     data: () => ({
-      darkMode: false,
+      file: null,
     }),
 
     created () {
-      this.darkMode = this.$vuetify.theme.dark;
     },
     methods: {
-      switchOption (val) {
-        this.$vuetify.theme.dark = val;
-        this.$emit('input', val);
-      },
+      //
     },
   };
 </script>

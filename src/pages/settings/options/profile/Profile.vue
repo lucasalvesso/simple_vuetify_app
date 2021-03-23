@@ -3,15 +3,11 @@
     class="mx-auto fill-height"
   >
     <v-card-title class="justify-center">
-      Themes
+      Profile
     </v-card-title>
 
     <v-card-text>
-      <dark-theme v-model="entity.dark_theme" />
-      <v-divider class="pa-2" />
-      <top-app-bar v-model="entity.top_app_bar" />
-      <v-divider class="pa-2" />
-      <side-menu-color v-model="entity.side_menu_color" />
+      <profile-picture v-model="entity.picture" />
       <v-divider class="pa-2" />
     </v-card-text>
     <v-card-actions>
@@ -33,23 +29,17 @@
 </template>
 
 <script>
-  import DarkTheme from '@/pages/settings/options/themes/DarkTheme';
-  import TopAppBar from '@/pages/settings/options/themes/TopAppBar';
-  import SideMenuColor from '@/pages/settings/options/themes/SideMenuColor';
+  import Picture from '@/pages/settings/options/profile/Picture';
   export default {
-    name: 'Themes',
-    tag: 'themes',
+    name: 'Profile',
+    tag: 'profile',
     components: {
-      DarkTheme,
-      TopAppBar,
-      SideMenuColor,
+      'profile-picture': Picture,
     },
 
     data: () => ({
       entity: {
-        dark_theme: false,
-        top_app_bar: null,
-        side_menu_color: null,
+        picture: null,
       },
     }),
 

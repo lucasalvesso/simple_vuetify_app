@@ -34,8 +34,7 @@
       width="600px"
     >
       <themes v-if="configDialog === 'themes'" />
-      <themes v-if="configDialog === 'themes2'" />
-      <themes v-if="configDialog === 'themes3'" />
+      <profile v-if="configDialog === 'profile'" />
     </v-dialog>
   </v-row>
 </template>
@@ -43,16 +42,17 @@
 <script>
   import './options/index';
   import Themes from '@/pages/settings/options/themes/Themes';
+  import Profile from '@/pages/settings/options/profile/Profile';
   export default {
     name: 'Settings',
-    components: { Themes },
+    components: { Themes, Profile },
     data: () => ({
       configDialog: null,
       dialog: false,
     }),
     computed: {
       allSettings () {
-        return [{ code: 'themes', name: 'Themes' }, { code: 'themes2', name: 'Themes 2' }, { code: 'themes3', name: 'Themes 3' }];
+        return [{ code: 'themes', name: 'Themes' }, { code: 'profile', name: 'Profile' }];
       },
     },
     watch: {
